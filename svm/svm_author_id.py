@@ -29,7 +29,7 @@ labels_train = labels_train[:len(labels_train)/100]
 
 from sklearn import svm, metrics
 t0 = time()
-clf = svm.SVC(kernel='rbf')
+clf = svm.SVC(kernel='rbf', C=10000)
 clf.fit(features_train, labels_train)
 print("training time:", round(time()-t0, 3), "s")
 
