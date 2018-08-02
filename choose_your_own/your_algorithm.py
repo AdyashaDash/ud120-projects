@@ -33,7 +33,7 @@ plt.show()
 from sklearn import metrics, ensemble, naive_bayes, svm
 from sklearn.tree import DecisionTreeClassifier
 # clf = ensemble.AdaBoostClassifier(base_estimator=DecisionTreeClassifier(max_depth=2), n_estimators=100)
-clf = svm.SVC(kernel='rbf', C=10000)
+clf = svm.SVC(kernel='rbf', C=50000)
 clf.fit(features_train, labels_train)
 labels_pred = clf.predict(features_test)
 acc = metrics.accuracy_score(labels_test, labels_pred)
