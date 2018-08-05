@@ -18,9 +18,8 @@
 import pickle
 
 enron_data = pickle.load(open("../final_project/final_project_dataset.pkl", "r"))
-#print len(enron_data) #no. of datapoints
-# for k1,v1 in enron_data.iteritems(): # no. of features
-# 	num = 0
-# 	for k2,v2 in v1.iteritems():
-# 		num = num+1
-# 		print k2
+num_poi = 0
+for k1,v1 in enron_data.iteritems(): # no. of features
+	if (enron_data[k1]["poi"]):
+		num_poi = num_poi + 1
+print num_poi
