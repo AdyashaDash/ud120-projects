@@ -43,6 +43,18 @@ data_dict = pickle.load( open("../final_project/final_project_dataset.pkl", "r")
 ### there's an outlier--remove it! 
 data_dict.pop("TOTAL", 0)
 
+max_exercised_stock_option = 0.0
+min_exercised_stock_option = 10000000000000.0
+for key1 in data_dict:
+    for key2 in data_dict[key1]:
+        if (key2 == "exercised_stock_options" and data_dict[key1][key2] != "NaN" and data_dict[key1][key2] != 0):
+            if (data_dict[key1][key2] > max_exercised_stock_option):
+                max_exercised_stock_option = data_dict[key1][key2]
+            elif (data_dict[key1][key2] < min_exercised_stock_option):
+                min_exercised_stock_option = data_dict[key1][key2]
+
+print max_exercised_stock_option
+print min_exercised_stock_option
 
 ### the input features we want to use 
 ### can be any key in the person-level dictionary (salary, director_fees, etc.) 
