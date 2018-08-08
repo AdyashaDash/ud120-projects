@@ -18,8 +18,3 @@
 import pickle
 
 enron_data = pickle.load(open("../final_project/final_project_dataset.pkl", "r"))
-num_poi = 0
-for k1,v1 in enron_data.iteritems(): # no. of features
-	if (enron_data[k1]["poi"]):
-		num_poi = num_poi + 1
-print num_poi
