@@ -13,6 +13,7 @@ import matplotlib.pyplot as plt
 import sys
 sys.path.append("../tools/")
 from feature_format import featureFormat, targetFeatureSplit
+from sklearn import preprocessing
 
 
 
@@ -36,29 +37,10 @@ def Draw(pred, features, poi, mark_poi=False, name="image.png", f1_name="feature
     plt.savefig(name)
     plt.show()
 
-def min_max(key_to_be_compared, dict_of_data):
-    max_value = 0.0
-    min_value = 10000000000000.0
-    for key1 in dict_of_data:
-        for key2 in dict_of_data[key1]:
-            if (key2 == key_to_be_compared and dict_of_data[key1][key2] 
-                != "NaN" and dict_of_data[key1][key2] != 0):
-                if (dict_of_data[key1][key2] > max_value):
-                    max_value = dict_of_data[key1][key2]
-                elif (dict_of_data[key1][key2] < min_value):
-                    min_value = dict_of_data[key1][key2]
-
-    print "max value of", key_to_be_compared, "is:", max_value
-    print "min value of", key_to_be_compared, "is:", min_value
-
-
 ### load in the dict of dicts containing all the data on each person in the dataset
 data_dict = pickle.load( open("../final_project/final_project_dataset.pkl", "r") )
 ### there's an outlier--remove it! 
 data_dict.pop("TOTAL", 0)
-
-min_max("exercised_stock_options", data_dict)
-min_max("salary", data_dict)
 
 ### the input features we want to use 
 ### can be any key in the person-level dictionary (salary, director_fees, etc.) 
@@ -67,8 +49,22 @@ feature_2 = "exercised_stock_options"
 # feature_3 = "total_payments"
 poi  = "poi"
 features_list = [poi, feature_1, feature_2]
-data = featureFormat(data_dict, features_list )
+init_data = featureFormat(data_dict, features_list )
+
+min_max_scaler = preprocessing.MinMaxScaler()
+
+rescaled_feature_1 = min_max_scaler.fit_transform(init_data[:,1].astype(float))
+print "Salary of 200,000 is  transforemd to:", min_max_scaler.transform([200000])
+
+rescaled_feature_2 = min_max_scaler.fit_transform(init_data[:,2].astype(float))
+print "Exercised Stock Otions of 1 million is transforemd to:", min_max_scaler.transform([1000000])
+
+data = numpy.zeros((init_data[:,0].size,3))
+data[:,0] = init_data[:,0]
+data[:,1] = rescaled_feature_1
+data[:,2] = rescaled_feature_2
 poi, finance_features = targetFeatureSplit( data )
+
 
 
 ### in the "clustering with 3 features" part of the mini-project,
