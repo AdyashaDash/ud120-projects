@@ -63,7 +63,7 @@ for name, from_person in [("sara", from_sara), ("chris", from_chris)]:
         word_data.append(stemmed_cleaned_email)
 
         ### append a 0 to from_data if email is from Sara, and 1 if email is from Chris
-        from_data.append(int(name == "Chris"))
+        from_data.append(int(name == "chris"))
 
         email.close()
 
