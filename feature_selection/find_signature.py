@@ -44,7 +44,13 @@ clf.fit(features_train, labels_train)
 labels_pred = clf.predict(features_test)
 acc = metrics.accuracy_score(labels_test, labels_pred)
 print acc
-print labels_test
 
+max_imp = 0.0
+feature = []
+for imp in clf.feature_importances_:
+	if imp > max_imp:
+		max_imp = imp
+
+print max_imp, numpy.nonzero(clf.feature_importances_ == max_imp) #correct answer for the index is 33614
 
 
