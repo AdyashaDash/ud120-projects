@@ -56,7 +56,7 @@ for name, from_person in [("sara", from_sara), ("chris", from_chris)]:
         stemmed_email = parseOutText(email)
 
         ### remove any instances of the stop words
-        stopwords =  ["sara", "shackleton", "chris", "germani", "sshacklensf", "cgermannsf", "shackletonhouectect", "shackletonhouect"] #added extra stopwords in L12, Q29, Q30
+        stopwords =  ["sara", "shackleton", "chris", "germani", "sshacklensf", "cgermannsf"] #added extra stopwords in L12, Q29, Q30
         stemmed_cleaned_email = removeStopwords(stemmed_email, stopwords)
 
         ### append the text to word_data
