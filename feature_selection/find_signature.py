@@ -27,7 +27,7 @@ vectorizer = TfidfVectorizer(sublinear_tf=True, max_df=0.5,
                              stop_words='english')
 features_train = vectorizer.fit_transform(features_train)
 features_test  = vectorizer.transform(features_test).toarray()
-
+print vectorizer.get_feature_names()[33698]
 
 ### a classic way to overfit is to use a small number
 ### of data points and a large number of features;
@@ -46,7 +46,6 @@ acc = metrics.accuracy_score(labels_test, labels_pred)
 print acc
 
 max_imp = 0.0
-feature = []
 for imp in clf.feature_importances_:
 	if imp > max_imp:
 		max_imp = imp
